@@ -6,7 +6,7 @@ Thank you for your interest in contributing to **Git Clarity**! We welcome all c
 
 1. **Fork and Clone** the repository:
    ```bash
-   git clone https://github.com/<your-username>/git-clarity.git
+   git clone https://github.com/chiytpremium3-ai/git-clarity.git
    cd git-clarity
    ```
 

@@ -2,7 +2,7 @@
 
 > **AI-native Git diff analyzer, conventional commit synthesizer, and automated PR review assistant for modern engineering teams.**
 
-[![CI](https://github.com/username/git-clarity/actions/workflows/ci.yml/badge.svg)](https://github.com/username/git-clarity/actions)
+[![CI](https://github.com/chiytpremium3-ai/git-clarity/actions/workflows/ci.yml/badge.svg)](https://github.com/chiytpremium3-ai/git-clarity/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -38,7 +38,7 @@ Writing clean commit messages, conducting rapid pre-flight code reviews, and ass
 Install via pip:
 
 ```bash
-git clone https://github.com/<your-username>/git-clarity.git
+git clone https://github.com/chiytpremium3-ai/git-clarity.git
 cd git-clarity
 pip install -e .
 ```
