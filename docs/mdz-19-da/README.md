@@ -28,6 +28,12 @@
 　➤ AirPlay、Dolby/DTS、HDMI、低音炮、後環繞都還是原廠程式在跑，風險最低。
 　➤ Root 或 TWRP 備份目前**沒有** MDZ-19-DA 專用映像，列為「有條件才做」的選項。
 
+➤ **HDMI 可能是零風險的 Android TV 捷徑（詳見 §1.1）。**
+　➤ ✅ 主機有 3 個 HDMI 2.0a，其中 1 個是 ARC；另有 S/PDIF 輸入（AV 埠）與輸出[S31]。
+　➤ ✅ 評測說這台主機的介面「與小米分體電視的主機基本一致」[S31]；同系列的米 3 電視主機把 **HDMI IN 1 定義為 ARC**[S32]。
+　➤ 🟡 如果另外兩個 HDMI 是輸入，就能把 Google TV／Android TV 裝置接進家庭影院，聲音直接走原廠 Dolby／DTS 與環繞，系統完全不用改。
+　➤ ❓ 哪個埠是輸出、哪些是輸入、HDMI 輸入的音訊會不會送到後環繞，要看你的背板標示並實測。
+
 ➤ **CleanYourTV：主線版無法裝在 Android 6；社群的 Android 6 分支可以試，但只有一台小米電視測過。**
 　➤ ✅ 主線 launcher 的 `minSdk 26`（Android 8.0）[S13][S14]。
 　➤ ✅ 分支 `my-tv-signal-android6` 用 `-PlauncherMinSdk=23` 編譯，只在 MiTV4-ANSM0 測過[S17]。
@@ -58,6 +64,7 @@
 ➤ ✅ 無線收發器插在主機背面的 USB 2.0 埠；後環繞走 5G 無線，有自動跳頻；低音炮用線材連接[S5]。
 ➤ ✅ 兩顆後環繞之間用 6 公尺線材互連，只需要一條電源線[S4]。訊號異常時可按後環繞背面的重置鍵[S5]。
 ➤ ✅ 低音炮背面有 AUX IN[S5]。
+➤ ✅ 主機背板：HDMI 2.0a ×3（含 1 個 ARC）、USB 3.0 ×1、USB 2.0 ×1、乙太網路 ×1、AV（R/L/Video，兼 S/PDIF 輸入）×1、S/PDIF 輸出 ×1、Woofer ×1、類比訊號／DTMB ×1、DC IN ×1[S31]。
 ➤ ✅ 手機、平板、筆電可透過藍牙或 Wi-Fi 送音訊過來[S3][S5]。
 
 關於 `missionimpossible`／`613`：
@@ -65,6 +72,22 @@
 ➤ ❓ 公開網路上只有一個 SEO 韌體站出現「Xiaomi mitv3s missionimpossible」[S9]。這個站的檔案只有幾 MB、日期矛盾、沒有雜湊值，**不可信也不要下載**。
 ➤ 🟡 字串本身暗示這台機器的 build 是掛在 mitv3s 世代的小米電視產品線底下，跟 MDZ-19-DA 同期（2016 年底）的小米電視 3s 相符。
 ➤ ✅ 同為 T966 的小米機種：小米電視 4 的 65 吋版[S24]（49／55 吋是 T968）。這是唯一已知同 SoC 的小米機種，但它是電視，不是 Soundbar。
+
+### 1.1 HDMI 1 的特殊角色
+
+➤ ✅ hdav 評測（2017-02-14）：3 個 HDMI 2.0a「含 1 個 ARC」，介面「與小米電視的主機基本一致」，但沒有標出哪個埠是 HDMI 1／2／3，也沒寫輸入或輸出[S31]。
+➤ ✅ 同系列的米 3 電視主機在 2015 年底用軟體更新把 **HDMI IN 1 指定為 ARC**，設定路徑是「設定 → 圖像與聲音 → 聲音／輸出 → HDMI(ARC)」[S32]。
+➤ ✅ CleanYourTV 的小米 Android 6 文件記錄：小米系統用 `com.xiaomi.mitv.tvplayer/.ExternalSourceActivity` 切換訊號源，`input` 參數 HDMI 1＝23、HDMI 2＝24、HDMI 3＝25、AV＝2[S16]。
+➤ 🟡 分體電視主機是用專用線接面板，所以 3 個 HDMI 都是輸入。家庭影院要把畫面送到一般電視，必須有一個埠改當**輸出**。你記得「HDMI 1 比較特殊」，最可能的情況是：
+　➤ HDMI 1＝**輸出到電視＋ARC**（電視自己的 App 聲音可以回傳到家庭影院），或
+　➤ HDMI 1＝**ARC 輸入**（沿用米 3 主機的定義），另有一個埠是輸出。
+➤ ❓ 兩種情況都還沒有原始資料證實，請直接看主機背板 HDMI 旁的印字（例如 `HDMI OUT (ARC)`、`HDMI IN 1`）。
+
+**這對改裝方案的影響**
+
+➤ 如果有可用的 HDMI 輸入：外接 Google TV／Android TV 裝置 → 家庭影院 HDMI IN → 家庭影院 HDMI OUT → 電視。Android TV 體驗來自外接裝置，家庭影院本身的系統、AirPlay、環繞一律不動（方案 D，見 §7）。
+➤ 如果 HDMI 1 是輸出＋ARC：外接裝置也可以接在**電視**上，再靠 ARC 把聲音送回家庭影院。缺點是 ARC 只能傳壓縮的 Dolby Digital／DTS 或雙聲道 PCM，而且要看電視的 ARC 實作。
+➤ ❓ 外接 HDMI 輸入的聲音會不會經過原廠上混送到兩顆後環繞，必須實測（§9 Phase 0 已加入測試項目）。
 
 ---
 
@@ -149,6 +172,7 @@ iPhone ──mDNS(_airplay._tcp/_raop._tcp)──▶ com.duokan.airkan.tvbox（�
 | AirPlay 螢幕鏡像 | ✅ 保留 | ❌ 同上；只能改裝第三方接收器（如 AirScreen），音訊不一定走原廠環繞 | 🟡 |
 | Dolby／DTS 解碼 | ✅ 保留 | 🟡 高機率失去或降級（解碼器與授權在 vendor 層） | [S2][S4] |
 | HDMI 輸出／CEC | ✅ 保留 | 🟡 可能可用，但解析度、HDR、CEC 行為不保證 | ❓ |
+| HDMI 輸入切換、HDMI 1 ARC | ✅ 保留 | 🟡 高機率失去：訊號源切換靠小米 `tvplayer`，ARC 設定在小米設定 App | [S16][S32] |
 | Soundbar 主喇叭 | ✅ 保留 | 🟡 **可能完全無聲**：功放初始化與 EQ 在原廠 kernel／dtb／audio HAL | 🟡 |
 | 低音炮（有線） | ✅ 保留 | 🟡 同上，輸出路由靠原廠 mixer 設定 | [S5] |
 | 兩顆無線後環繞 | ✅ 保留 | ❌ 幾乎確定失去（USB 5G 發射器需要私有驅動／服務） | [S5] |
@@ -240,12 +264,14 @@ docs/mdz-19-da/scripts/fw_analyze.sh mdz19da_dump_20261026_xxxx  fw_work
 | **A. 完整刷 Android TV** | 整機換 ATV ROM | ❌ 沒有 ROM、沒有 TWRP、沒有線刷包 | ❌ 失去 | 極高，且無救磚手段 | **不要做** |
 | **B. 混合式（免 Root）** | 原廠系統不動；ADB 側載 Android 6 版桌面與 App | ✅ 技術上可行（同系統有成功例） | ✅ 保留 | 低（只裝 App，可解除安裝） | **首選** |
 | C. 混合式＋Root | 用 USB 開機的 TWRP 做全分割區備份，Magisk systemless | ❓ 目前沒有 MDZ-19-DA 版 TWRP；UART 焊點未知 | ✅ 理論上保留 | 中至高 | 只有出現專用 TWRP 或能接 UART 時才考慮 |
-| D. 外接 Google TV 裝置 | 另買 Google TV 裝置接電視；家庭影院照舊當 AirPlay 音響 | ✅ | ✅ 完全不動 | 零 | B 不滿意時的替代方案 |
+| D. 外接 Google TV 裝置 | Google TV 裝置接到家庭影院的 HDMI 輸入（或接電視再走 ARC）；家庭影院系統完全不動 | 🟡 取決於 HDMI 埠角色（§1.1） | ✅ 完全不動 | 零 | **若 HDMI 輸入可用，與 B 並列首選** |
 
 方案 D 補充：
 
-➤ 🟡 MDZ-19-DA 本身是 HDMI **輸出**到電視的主機[S4]，外接裝置的聲音不會自動進到家庭影院。
-➤ ✅ 可行的音訊進入方式有：低音炮的 AUX IN（類比立體聲，沒有環繞）[S5]，或用手機／電腦以 AirPlay、藍牙推送[S3]。
+➤ ✅ 主機有 3 個 HDMI（含 ARC）與 S/PDIF 輸入[S31]，外接裝置的聲音有機會直接進家庭影院解碼。
+➤ 🟡 最理想的接法是「外接裝置 → 家庭影院 HDMI IN → 家庭影院 HDMI OUT → 電視」；次佳是「外接裝置 → 電視 → ARC 回傳」。
+➤ ✅ 其他音訊進入方式：AV 埠的 S/PDIF 輸入[S31]、低音炮的 AUX IN（類比立體聲，沒有環繞）[S5]、手機／電腦以 AirPlay 或藍牙推送[S3]。
+➤ ❓ 外接音源有沒有後環繞，要實測。
 
 ---
 
@@ -272,6 +298,11 @@ docs/mdz-19-da/scripts/fw_analyze.sh mdz19da_dump_20261026_xxxx  fw_work
 
 ➤ 拍下「設定 → 關於」的所有頁面（型號、系統版本、MAC）。
 ➤ 實測並記錄：iPhone AirPlay 音樂、AirPlay 螢幕鏡像、含 Dolby／DTS 音軌的影片、低音炮、兩顆後環繞。這份紀錄就是之後每一步的驗收標準。
+➤ 拍下主機背板 HDMI 埠旁的印字，記錄目前哪一條線接哪個埠。
+➤ HDMI 測試：
+　➤ 把任何 HDMI 裝置（電腦、遊戲機、盒子）接到另外兩個 HDMI 埠，用訊號源選單切換，看畫面與聲音是否正常。
+　➤ 播放含 Dolby／DTS 5.1 音軌的內容，確認兩顆後環繞有沒有聲音。
+　➤ 在「設定 → 聲音／輸出」找有沒有 HDMI(ARC) 選項，並測試電視的聲音能不能回傳。
 ➤ 在完成 Phase 1 備份之前，**不要**做系統更新，也不要恢復原廠設定。
 
 **Phase 1：免 Root 盤點與備份（必做）**
@@ -356,6 +387,7 @@ Phase 1 跑完後，下面這些就能從 ❓ 變成 ✅：
 5. `/dev/block` 下是否有 `backup` 分割區。
 6. `framework` 內是否有 `MitvPhoneWindowManager`（決定 HOME 鍵是否會被攔截）。
 7. audio HAL 的檔名，以及 Dolby／DTS 相關函式庫的位置。
+8. 三個 HDMI 埠各自的角色（背板印字＋`audio/hdmi_control.txt`、`audio/tv_input.txt`），以及外接 HDMI 音源是否送到後環繞。
 
 ---
 
@@ -396,6 +428,8 @@ Phase 1 跑完後，下面這些就能從 ❓ 變成 ✅：
 | S28 | [Mobile01：開箱 小米家庭影視劇院 無線環繞版](https://www.mobile01.com/topicdetail.php?f=347&t=5022408)（摘要） | 台灣使用者開箱，未涉及 AirPlay 或刷機 |
 | S29 | [4PDA：Xiaomi Mi Box 3S](https://4pda.to/forum/index.php?showtopic=785507)（摘要）、[CNX Software](https://www.cnx-software.com/?p=39631)（摘要） | MDZ-19-AA 為 S905X |
 | S30 | [Kodi Forum：MDZ-19-AA can flash to Global](https://forum.kodi.tv/showthread.php?tid=316627)、[Lowyat 論壇](https://forum.lowyat.net/topic/3561305/+1380)（摘要） | MDZ-19-AA 轉國際版的社群回報 |
+| S31 | [家庭影院網：小米家庭影院體驗評測（2017-02-14）](https://www.hdav.com.cn/cp/cpyx/3883.html) | 主機背板介面：HDMI 2.0a ×3（含 1 個 ARC）、S/PDIF 輸入與輸出；介面與分體電視主機基本一致 |
+| S32 | [ZNDS：小米 3 電視連接次世代功放（ARC）教程（2016-03-02）](https://www.znds.com/tv-376894-1-1.html) | 米 3 電視主機把 HDMI IN 1 定義為 ARC，以及設定路徑 |
 
 ---
 

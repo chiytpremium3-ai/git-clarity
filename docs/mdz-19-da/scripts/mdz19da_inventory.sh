@@ -68,6 +68,7 @@ sh_out audio/audio_flinger.txt dumpsys media.audio_flinger
 sh_out audio/audio_policy.txt dumpsys media.audio_policy
 sh_out audio/audio_service.txt dumpsys audio
 sh_out audio/hdmi_control.txt dumpsys hdmi_control
+sh_out audio/tv_input.txt dumpsys tv_input
 sh_out audio/asound_cards.txt cat /proc/asound/cards
 sh_out audio/asound_pcm.txt cat /proc/asound/pcm
 sh_out audio/dev_snd.txt ls -l /dev/snd
