@@ -28,11 +28,11 @@
 　➤ AirPlay、Dolby/DTS、HDMI、低音炮、後環繞都還是原廠程式在跑，風險最低。
 　➤ Root 或 TWRP 備份目前**沒有** MDZ-19-DA 專用映像，列為「有條件才做」的選項。
 
-➤ **HDMI 可能是零風險的 Android TV 捷徑（詳見 §1.1）。**
-　➤ ✅ 主機有 3 個 HDMI 2.0a，其中 1 個是 ARC；另有 S/PDIF 輸入（AV 埠）與輸出[S31]。
-　➤ ✅ 評測說這台主機的介面「與小米分體電視的主機基本一致」[S31]；同系列的米 3 電視主機把 **HDMI IN 1 定義為 ARC**[S32]。
-　➤ 🟡 如果另外兩個 HDMI 是輸入，就能把 Google TV／Android TV 裝置接進家庭影院，聲音直接走原廠 Dolby／DTS 與環繞，系統完全不用改。
-　➤ ❓ 哪個埠是輸出、哪些是輸入、HDMI 輸入的音訊會不會送到後環繞，要看你的背板標示並實測。
+➤ **HDMI 是零風險的 Android TV 捷徑（詳見 §1.1）。**
+　➤ ✅ 畫面是從專用的 **MI PORT** 接口，經隨附的「MIPORT-HDMI 連線」送到電視[S2][S33]。
+　➤ ✅ 主機的 3 個 HDMI 2.0a（含 1 個 ARC）[S31]；同介面的小米電視主機官方規格寫明 3 個 HDMI 全是**輸入**[S33][S34]。
+　➤ 🟡 所以可以把 Google TV／Android TV 裝置接進家庭影院的 HDMI 輸入，聲音由原廠 Dolby／DTS 解碼，系統完全不用改。
+　➤ ❓ 外接 HDMI 的聲音會不會送到兩顆後環繞，要實測。
 
 ➤ **CleanYourTV：主線版無法裝在 Android 6；社群的 Android 6 分支可以試，但只有一台小米電視測過。**
 　➤ ✅ 主線 launcher 的 `minSdk 26`（Android 8.0）[S13][S14]。
@@ -75,19 +75,41 @@
 
 ### 1.1 HDMI 1 的特殊角色
 
-➤ ✅ hdav 評測（2017-02-14）：3 個 HDMI 2.0a「含 1 個 ARC」，介面「與小米電視的主機基本一致」，但沒有標出哪個埠是 HDMI 1／2／3，也沒寫輸入或輸出[S31]。
-➤ ✅ 同系列的米 3 電視主機在 2015 年底用軟體更新把 **HDMI IN 1 指定為 ARC**，設定路徑是「設定 → 圖像與聲音 → 聲音／輸出 → HDMI(ARC)」[S32]。
-➤ ✅ CleanYourTV 的小米 Android 6 文件記錄：小米系統用 `com.xiaomi.mitv.tvplayer/.ExternalSourceActivity` 切換訊號源，`input` 參數 HDMI 1＝23、HDMI 2＝24、HDMI 3＝25、AV＝2[S16]。
-➤ 🟡 分體電視主機是用專用線接面板，所以 3 個 HDMI 都是輸入。家庭影院要把畫面送到一般電視，必須有一個埠改當**輸出**。你記得「HDMI 1 比較特殊」，最可能的情況是：
-　➤ HDMI 1＝**輸出到電視＋ARC**（電視自己的 App 聲音可以回傳到家庭影院），或
-　➤ HDMI 1＝**ARC 輸入**（沿用米 3 主機的定義），另有一個埠是輸出。
-➤ ❓ 兩種情況都還沒有原始資料證實，請直接看主機背板 HDMI 旁的印字（例如 `HDMI OUT (ARC)`、`HDMI IN 1`）。
+**接線架構（已證實的部分）**
+
+➤ ✅ 家庭影院官方包裝清單：電視主機、遙控器、電源線＋變壓器、**MIPORT 連線（MIPORT-HDMI 連線）**、說明書[S2]。
+➤ ✅ 主機背板：HDMI 2.0a ×3「含 1 個 ARC」，介面「與小米電視的主機基本一致」[S31]。
+➤ ✅ 小米電視主機（單機版）官方規格：HDMI 2.0 ×3 是輸入；輸出是「**MI PORT 轉 HDMI 輸出** ×1」，附「MI PORT 轉 HDMI 連線」[S33]。
+➤ ✅ 小米電視主機的介面說明：「3 個 HDMI 2.0 介面均為輸入介面」，可接電腦、遊戲機、藍光、機上盒、小米盒子；MI PORT 負責所有訊號與資料傳輸[S34]。
+➤ ✅ 小米電視 3（55／60／70 吋）與 3S（43／48／65 吋）的主機是「**HDMI-input-1 介面支援 ARC**」[S34]；米 3 主機在 2015 年底用軟體更新把 HDMI IN 1 指定為 ARC，設定路徑是「設定 → 圖像與聲音 → 聲音／輸出 → HDMI(ARC)」[S32]。
+➤ ✅ 小米 Android 6 系統用 `com.xiaomi.mitv.tvplayer/.ExternalSourceActivity` 切換訊號源，`input` 參數 HDMI 1＝23、HDMI 2＝24、HDMI 3＝25、AV＝2[S16]。
+
+**推論**
+
+```
+外接裝置 ──HDMI──▶ 家庭影院 HDMI 1／2／3（輸入）
+                         │ 原廠系統解碼 Dolby／DTS、上混
+                         ├──▶ Soundbar＋低音炮＋USB 5G 發射器 ──▶ 兩顆後環繞
+                         ▼
+               MI PORT ──MIPORT-HDMI 連線──▶ 電視 HDMI 輸入
+```
+
+➤ 🟡 MDZ-19-DA 的 3 個 HDMI 都是**輸入**，送畫面到電視的是 MI PORT，不是 HDMI 1。
+➤ 🟡 你記得「HDMI 1 比較特殊」，最可能就是 **HDMI 1 是那個 ARC 埠**：小米電視 3／3S 主機一律把 ARC 放在 HDMI-input-1[S32][S34]，而家庭影院的介面與它基本一致[S31]。
+➤ 🟡 在小米主機上，HDMI 1 的 ARC 是讓**主機把聲音回傳給接在 HDMI 1 的功放**（主機扮演電視的角色）[S32]。家庭影院自己就是音響，所以這個 ARC 對你多半用不到；HDMI 1 仍然可以當一般 HDMI 輸入使用。
+➤ ❓ 公開資料裡沒有 MDZ-19-DA 背板的逐埠印字，也沒有它的說明書全文，所以「ARC 在 HDMI 1」還差最後一步：看背板 HDMI 旁的印字（例如 `HDMI 1 (ARC)`）。
+
+**電視自己的聲音怎麼進家庭影院**
+
+➤ 🟡 MI PORT 是輸出，不能接收電視 ARC 回傳的聲音。
+➤ ✅ 主機的 AV 埠兼 **S/PDIF 輸入**[S31]；有索尼電視車主因為「電視只有光纖、家庭影院只有同軸」，用光纖轉同軸把電視聲音接進來，而 HDMI ARC 方案沒有成功[S35]。
+➤ 🟡 所以電視內建 App 或電視訊號的聲音，要走「電視光纖輸出 → 光纖轉同軸 → 家庭影院 S/PDIF 輸入」。
 
 **這對改裝方案的影響**
 
-➤ 如果有可用的 HDMI 輸入：外接 Google TV／Android TV 裝置 → 家庭影院 HDMI IN → 家庭影院 HDMI OUT → 電視。Android TV 體驗來自外接裝置，家庭影院本身的系統、AirPlay、環繞一律不動（方案 D，見 §7）。
-➤ 如果 HDMI 1 是輸出＋ARC：外接裝置也可以接在**電視**上，再靠 ARC 把聲音送回家庭影院。缺點是 ARC 只能傳壓縮的 Dolby Digital／DTS 或雙聲道 PCM，而且要看電視的 ARC 實作。
-➤ ❓ 外接 HDMI 輸入的聲音會不會經過原廠上混送到兩顆後環繞，必須實測（§9 Phase 0 已加入測試項目）。
+➤ 最佳做法：Google TV／Android TV 裝置 → 家庭影院 HDMI 2 或 3（保留 HDMI 1 給需要 ARC 的情況）→ MI PORT → 電視。Android TV 介面來自外接裝置，家庭影院本身的系統、AirPlay、環繞一律不動（方案 D，見 §7）。
+➤ 外接裝置請設成輸出 Dolby Digital／DTS bitstream（透傳），讓家庭影院自己解碼。
+➤ ❓ 外接 HDMI 的聲音會不會經過原廠上混送到兩顆後環繞，必須實測（§9 Phase 0 已加入測試項目）。
 
 ---
 
@@ -264,12 +286,12 @@ docs/mdz-19-da/scripts/fw_analyze.sh mdz19da_dump_20261026_xxxx  fw_work
 | **A. 完整刷 Android TV** | 整機換 ATV ROM | ❌ 沒有 ROM、沒有 TWRP、沒有線刷包 | ❌ 失去 | 極高，且無救磚手段 | **不要做** |
 | **B. 混合式（免 Root）** | 原廠系統不動；ADB 側載 Android 6 版桌面與 App | ✅ 技術上可行（同系統有成功例） | ✅ 保留 | 低（只裝 App，可解除安裝） | **首選** |
 | C. 混合式＋Root | 用 USB 開機的 TWRP 做全分割區備份，Magisk systemless | ❓ 目前沒有 MDZ-19-DA 版 TWRP；UART 焊點未知 | ✅ 理論上保留 | 中至高 | 只有出現專用 TWRP 或能接 UART 時才考慮 |
-| D. 外接 Google TV 裝置 | Google TV 裝置接到家庭影院的 HDMI 輸入（或接電視再走 ARC）；家庭影院系統完全不動 | 🟡 取決於 HDMI 埠角色（§1.1） | ✅ 完全不動 | 零 | **若 HDMI 輸入可用，與 B 並列首選** |
+| D. 外接 Google TV 裝置 | Google TV 裝置接到家庭影院的 HDMI 輸入，畫面經 MI PORT 送電視；家庭影院系統完全不動 | ✅ 3 個 HDMI 為輸入（同介面主機的官方規格）[S33][S34] | ✅ 完全不動 | 零 | **與 B 並列首選；要完整 Android TV 體驗選這個** |
 
 方案 D 補充：
 
-➤ ✅ 主機有 3 個 HDMI（含 ARC）與 S/PDIF 輸入[S31]，外接裝置的聲音有機會直接進家庭影院解碼。
-➤ 🟡 最理想的接法是「外接裝置 → 家庭影院 HDMI IN → 家庭影院 HDMI OUT → 電視」；次佳是「外接裝置 → 電視 → ARC 回傳」。
+➤ ✅ 主機有 3 個 HDMI 輸入（含 ARC）與 S/PDIF 輸入[S31][S34]，外接裝置的聲音可以直接進家庭影院解碼。
+➤ 🟡 接法是「外接裝置 → 家庭影院 HDMI 2／3 → MI PORT → 電視」。接在電視再靠 ARC 回傳行不通，因為 MI PORT 是輸出端。
 ➤ ✅ 其他音訊進入方式：AV 埠的 S/PDIF 輸入[S31]、低音炮的 AUX IN（類比立體聲，沒有環繞）[S5]、手機／電腦以 AirPlay 或藍牙推送[S3]。
 ➤ ❓ 外接音源有沒有後環繞，要實測。
 
@@ -298,7 +320,7 @@ docs/mdz-19-da/scripts/fw_analyze.sh mdz19da_dump_20261026_xxxx  fw_work
 
 ➤ 拍下「設定 → 關於」的所有頁面（型號、系統版本、MAC）。
 ➤ 實測並記錄：iPhone AirPlay 音樂、AirPlay 螢幕鏡像、含 Dolby／DTS 音軌的影片、低音炮、兩顆後環繞。這份紀錄就是之後每一步的驗收標準。
-➤ 拍下主機背板 HDMI 埠旁的印字，記錄目前哪一條線接哪個埠。
+➤ 拍下主機背板 HDMI 埠旁的印字（確認 ARC 是否在 HDMI 1），記錄目前哪一條線接哪個埠。
 ➤ HDMI 測試：
 　➤ 把任何 HDMI 裝置（電腦、遊戲機、盒子）接到另外兩個 HDMI 埠，用訊號源選單切換，看畫面與聲音是否正常。
 　➤ 播放含 Dolby／DTS 5.1 音軌的內容，確認兩顆後環繞有沒有聲音。
@@ -430,6 +452,9 @@ Phase 1 跑完後，下面這些就能從 ❓ 變成 ✅：
 | S30 | [Kodi Forum：MDZ-19-AA can flash to Global](https://forum.kodi.tv/showthread.php?tid=316627)、[Lowyat 論壇](https://forum.lowyat.net/topic/3561305/+1380)（摘要） | MDZ-19-AA 轉國際版的社群回報 |
 | S31 | [家庭影院網：小米家庭影院體驗評測（2017-02-14）](https://www.hdav.com.cn/cp/cpyx/3883.html) | 主機背板介面：HDMI 2.0a ×3（含 1 個 ARC）、S/PDIF 輸入與輸出；介面與分體電視主機基本一致 |
 | S32 | [ZNDS：小米 3 電視連接次世代功放（ARC）教程（2016-03-02）](https://www.znds.com/tv-376894-1-1.html) | 米 3 電視主機把 HDMI IN 1 定義為 ARC，以及設定路徑 |
+| S33 | [小米商城：小米電視主機 參數](https://www.mi.com/tvzj/specs)（摘要） | HDMI 2.0 ×3 為輸入；MI PORT 轉 HDMI 輸出 ×1；附 MI PORT 轉 HDMI 連線 |
+| S34 | [百度知道：小米電視主機介面說明（2024-10-11）](https://zhidao.baidu.com/question/1187405304983603499.html) | 3 個 HDMI 均為輸入；小米電視 3／3S 的 HDMI-input-1 支援 ARC；MI PORT 角色 |
+| S35 | [什麼值得買：當索尼電視遇上小米家庭影院](https://post.smzdm.com/p/540441/)（摘要） | 家庭影院的 S/PDIF 輸入為同軸；車主用光纖轉同軸接電視聲音，HDMI ARC 未成功 |
 
 ---
 
