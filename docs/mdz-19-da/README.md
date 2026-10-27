@@ -95,9 +95,10 @@
 ```
 
 ➤ 🟡 MDZ-19-DA 的 3 個 HDMI 都是**輸入**，送畫面到電視的是 MI PORT，不是 HDMI 1。
-➤ 🟡 你記得「HDMI 1 比較特殊」，最可能就是 **HDMI 1 是那個 ARC 埠**：小米電視 3／3S 主機一律把 ARC 放在 HDMI-input-1[S32][S34]，而家庭影院的介面與它基本一致[S31]。
+➤ ✅ **HDMI 1 就是那個 ARC 埠**：車主實機背板印字為 `HDMI 1 (ARC)`（2026-10-27 確認）[S36]。這與小米電視 3／3S 主機把 ARC 放在 HDMI-input-1 的設計一致[S32][S34]。
 ➤ 🟡 在小米主機上，HDMI 1 的 ARC 是讓**主機把聲音回傳給接在 HDMI 1 的功放**（主機扮演電視的角色）[S32]。家庭影院自己就是音響，所以這個 ARC 對你多半用不到；HDMI 1 仍然可以當一般 HDMI 輸入使用。
-➤ ❓ 公開資料裡沒有 MDZ-19-DA 背板的逐埠印字，也沒有它的說明書全文，所以「ARC 在 HDMI 1」還差最後一步：看背板 HDMI 旁的印字（例如 `HDMI 1 (ARC)`）。
+➤ 公開資料裡沒有 MDZ-19-DA 背板的逐埠印字，也沒有它的說明書全文，這一點是靠車主看實機背板補上的。
+➤ ❓ ARC 的方向（主機回傳聲音給外部功放，還是能接收外部聲音）仍是推論，要在「設定 → 聲音／輸出」看有沒有 HDMI(ARC) 選項才能確定。
 
 **電視自己的聲音怎麼進家庭影院**
 
@@ -320,7 +321,7 @@ docs/mdz-19-da/scripts/fw_analyze.sh mdz19da_dump_20261026_xxxx  fw_work
 
 ➤ 拍下「設定 → 關於」的所有頁面（型號、系統版本、MAC）。
 ➤ 實測並記錄：iPhone AirPlay 音樂、AirPlay 螢幕鏡像、含 Dolby／DTS 音軌的影片、低音炮、兩顆後環繞。這份紀錄就是之後每一步的驗收標準。
-➤ 拍下主機背板 HDMI 埠旁的印字（確認 ARC 是否在 HDMI 1），記錄目前哪一條線接哪個埠。
+➤ 拍下主機背板 HDMI 埠旁的印字（已確認 `HDMI 1 (ARC)`），記錄目前哪一條線接哪個埠。
 ➤ HDMI 測試：
 　➤ 把任何 HDMI 裝置（電腦、遊戲機、盒子）接到另外兩個 HDMI 埠，用訊號源選單切換，看畫面與聲音是否正常。
 　➤ 播放含 Dolby／DTS 5.1 音軌的內容，確認兩顆後環繞有沒有聲音。
@@ -409,7 +410,7 @@ Phase 1 跑完後，下面這些就能從 ❓ 變成 ✅：
 5. `/dev/block` 下是否有 `backup` 分割區。
 6. `framework` 內是否有 `MitvPhoneWindowManager`（決定 HOME 鍵是否會被攔截）。
 7. audio HAL 的檔名，以及 Dolby／DTS 相關函式庫的位置。
-8. 三個 HDMI 埠各自的角色（背板印字＋`audio/hdmi_control.txt`、`audio/tv_input.txt`），以及外接 HDMI 音源是否送到後環繞。
+8. ✅ HDMI 1 為 ARC（背板印字已確認）。尚待確認：HDMI 2／3 的實際行為（`audio/hdmi_control.txt`、`audio/tv_input.txt`），以及外接 HDMI 音源是否送到後環繞。
 
 ---
 
@@ -455,6 +456,7 @@ Phase 1 跑完後，下面這些就能從 ❓ 變成 ✅：
 | S33 | [小米商城：小米電視主機 參數](https://www.mi.com/tvzj/specs)（摘要） | HDMI 2.0 ×3 為輸入；MI PORT 轉 HDMI 輸出 ×1；附 MI PORT 轉 HDMI 連線 |
 | S34 | [百度知道：小米電視主機介面說明（2024-10-11）](https://zhidao.baidu.com/question/1187405304983603499.html) | 3 個 HDMI 均為輸入；小米電視 3／3S 的 HDMI-input-1 支援 ARC；MI PORT 角色 |
 | S35 | [什麼值得買：當索尼電視遇上小米家庭影院](https://post.smzdm.com/p/540441/)（摘要） | 家庭影院的 S/PDIF 輸入為同軸；車主用光纖轉同軸接電視聲音，HDMI ARC 未成功 |
+| S36 | 本機車主實機確認（2026-10-27） | MDZ-19-DA 背板印字 `HDMI 1 (ARC)` |
 
 ---
 
